@@ -7,10 +7,12 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
-
 $user_id = $_SESSION["user_id"];
 $result = $conn->query("SELECT name FROM Users WHERE user_id = $user_id");
 $user = $result->fetch_assoc();
+$result = $conn->query("SELECT name, profile_picture FROM Users WHERE user_id = $user_id");
+$user = $result->fetch_assoc();
+echo "<img src='uploads/" . $user['profile_picture'] . "' width='100' height='100'><br>";
 ?>
 
 <!DOCTYPE html>

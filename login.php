@@ -1,9 +1,11 @@
 <?php
 include_once("connection.php");
+include_once("functions.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
+    
 
     if (!empty($email) && !empty($password)) {
         $result = $conn->query("SELECT user_id, name, password, role FROM Users WHERE email = '$email'");
@@ -14,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $row['password'])) {
                 $_SESSION["user_id"] = $row['user_id'];
                 $_SESSION["role"] = $row['role'];
-                
+                logAction($conn, $_SESSION['user_id'], "Logged in");
                 header("Location: dashboard.php");
                 exit();
             } else {
