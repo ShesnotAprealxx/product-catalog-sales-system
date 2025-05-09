@@ -3,6 +3,7 @@ include_once("connection.php");
 include_once("functions.php");
 
 
+
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
@@ -29,6 +30,7 @@ echo "<img src='uploads/" . $user['profile_picture'] . "' width='100' height='10
         <?php if (isAdmin()): ?>
     |   <a href="manage_users.php">Manage Users</a>
         <?php endif; ?>
+        <a href="add_to_cart.php">Add to Cart</a>
     </nav>
     <div style="background-color:#e0e0e0; padding:10px;">
         <h1>Project Catalog and Sales System</h1>
